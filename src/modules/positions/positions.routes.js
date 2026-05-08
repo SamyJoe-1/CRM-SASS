@@ -1,0 +1,15 @@
+const router=require('express').Router();
+const ctrl=require('./positions.controller');
+const auth=require('../../middleware/authenticate');
+const ts=require('../../middleware/tenantScope');
+const authz=require('../../middleware/authorize');
+const validate=require('../../middleware/validate');
+const { z }=require('zod');
+const schema=z.object({ department_id:z.string().uuid().optional().nullable(), title:z.string().min(1).max(200), title_ar:z.string().max(200).optional(), description:z.string().max(500).optional() });
+router.use(auth,ts);
+router.get   ('/',    authz('positions:view'),   ctrl.list);
+router.post  ('/',    authz('positions:manage'), validate(schema),          ctrl.create);
+router.get   ('/:id', authz('positions:view'),   ctrl.getById);
+router.put   ('/:id', authz('positions:manage'), validate(schema.partial()), ctrl.update);
+router.delete('/:id', authz('positions:manage'), ctrl.remove);
+module.exports=router;

@@ -1,0 +1,20 @@
+exports.up = (knex) => knex.schema.createTable('users', (t) => {
+  t.text('id').primary();
+  t.text('tenant_id').references('id').inTable('tenants').onDelete('CASCADE');
+  t.text('role_id').references('id').inTable('roles');
+  t.text('role_name');
+  t.text('email').notNullable();
+  t.text('password_hash').notNullable();
+  t.text('first_name');
+  t.text('last_name');
+  t.text('language').defaultTo('en');
+  t.boolean('is_active').defaultTo(true);
+  t.text('password_reset_token');
+  t.text('password_reset_expires');
+  t.text('last_login_at');
+  t.text('deleted_at');
+  t.text('created_at').notNullable();
+  t.text('updated_at').notNullable();
+  t.unique(['tenant_id','email']);
+});
+exports.down = (knex) => knex.schema.dropTableIfExists('users');

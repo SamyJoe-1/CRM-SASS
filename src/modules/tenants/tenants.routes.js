@@ -1,0 +1,15 @@
+const router=require('express').Router();
+const ctrl=require('./tenants.controller');
+const auth=require('../../middleware/authenticate');
+const authz=require('../../middleware/authorize');
+const validate=require('../../middleware/validate');
+const { z }=require('zod');
+const createSchema=z.object({ name:z.string().min(1).max(200), slug:z.string().min(1).max(100).regex(/^[a-z0-9-]+$/), language:z.enum(['en','ar']).default('en'), timezone:z.string().default('UTC'), email:z.string().email().optional(), phone:z.string().optional() });
+router.use(auth);
+router.get   ('/',              authz('settings:view'),   ctrl.list);
+router.post  ('/',              authz('settings:update'), validate(createSchema),          ctrl.create);
+router.get   ('/:id',           authz('settings:view'),   ctrl.getById);
+router.put   ('/:id',           authz('settings:update'), validate(createSchema.partial()), ctrl.update);
+router.post  ('/:id/deactivate',authz('settings:update'), ctrl.deactivate);
+router.post  ('/:id/activate',  authz('settings:update'), ctrl.activate);
+module.exports=router;

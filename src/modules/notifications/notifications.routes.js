@@ -1,0 +1,11 @@
+const router=require('express').Router();
+const ctrl=require('./notifications.controller');
+const auth=require('../../middleware/authenticate');
+const ts=require('../../middleware/tenantScope');
+const authz=require('../../middleware/authorize');
+router.use(auth,ts);
+router.get ('/',              authz('notifications:view'), ctrl.list);
+router.get ('/unread-count',  authz('notifications:view'), ctrl.unreadCount);
+router.post('/:id/read',      authz('notifications:view'), ctrl.markRead);
+router.post('/read-all',      authz('notifications:view'), ctrl.markAllRead);
+module.exports=router;

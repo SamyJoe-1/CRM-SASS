@@ -1,0 +1,21 @@
+exports.up = (knex) => knex.schema.createTable('kpis', (t) => {
+  t.text('id').primary();
+  t.text('tenant_id').notNullable().references('id').inTable('tenants').onDelete('CASCADE');
+  t.text('employee_id').references('id').inTable('employees');
+  t.text('department_id').references('id').inTable('departments');
+  t.text('created_by').references('id').inTable('users');
+  t.text('title').notNullable();
+  t.text('description');
+  t.text('unit').defaultTo('number');
+  t.real('target_value').notNullable();
+  t.real('current_value').defaultTo(0);
+  t.text('period');
+  t.text('start_date');
+  t.text('end_date');
+  t.text('status').defaultTo('in_progress');
+  t.text('scope').defaultTo('employee');
+  t.text('deleted_at');
+  t.text('created_at').notNullable();
+  t.text('updated_at').notNullable();
+});
+exports.down = (knex) => knex.schema.dropTableIfExists('kpis');

@@ -1,0 +1,10 @@
+const svc=require('./announcements.service');
+const asyncHandler=require('../../utils/asyncHandler');
+const { success,created,noContent,paginated }=require('../../utils/response');
+const list    =asyncHandler(async(req,res)=>{ const r=await svc.list(req.tenantId,req.query); paginated(res,r.data,r.meta); });
+const getById =asyncHandler(async(req,res)=>success(res,await svc.getById(req.tenantId,req.params.id)));
+const create  =asyncHandler(async(req,res)=>created(res,await svc.create(req.tenantId,req.user.id,req.validated)));
+const update  =asyncHandler(async(req,res)=>success(res,await svc.update(req.tenantId,req.params.id,req.validated)));
+const publish =asyncHandler(async(req,res)=>success(res,await svc.publish(req.tenantId,req.params.id)));
+const remove  =asyncHandler(async(req,res)=>{ await svc.remove(req.tenantId,req.params.id); noContent(res); });
+module.exports={ list,getById,create,update,publish,remove };

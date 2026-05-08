@@ -1,0 +1,16 @@
+const router=require('express').Router();
+const ctrl=require('./announcements.controller');
+const auth=require('../../middleware/authenticate');
+const ts=require('../../middleware/tenantScope');
+const authz=require('../../middleware/authorize');
+const validate=require('../../middleware/validate');
+const { z }=require('zod');
+const schema=z.object({ title:z.string().min(1).max(200), title_ar:z.string().max(200).optional(), body:z.string().min(1), body_ar:z.string().optional(), audience:z.enum(['all','department']).default('all'), department_id:z.string().uuid().optional().nullable() });
+router.use(auth,ts);
+router.get   ('/',              authz('announcements:view'),    ctrl.list);
+router.post  ('/',              authz('announcements:create'),  validate(schema),          ctrl.create);
+router.get   ('/:id',           authz('announcements:view'),    ctrl.getById);
+router.put   ('/:id',           authz('announcements:create'),  validate(schema.partial()), ctrl.update);
+router.post  ('/:id/publish',   authz('announcements:publish'), ctrl.publish);
+router.delete('/:id',           authz('announcements:delete'),  ctrl.remove);
+module.exports=router;

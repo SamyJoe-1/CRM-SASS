@@ -1,0 +1,14 @@
+const router=require('express').Router();
+const ctrl=require('./settings.controller');
+const auth=require('../../middleware/authenticate');
+const ts=require('../../middleware/tenantScope');
+const authz=require('../../middleware/authorize');
+const validate=require('../../middleware/validate');
+router.use(auth,ts);
+router.get ('/general',         authz('settings:view'),   ctrl.getGeneral);
+router.put ('/general',         authz('settings:update'), validate(ctrl.tenantSchema),  ctrl.updateGeneral);
+router.get ('/payroll',         authz('settings:view'),   ctrl.getPayroll);
+router.put ('/payroll',         authz('settings:update'), validate(ctrl.payrollSchema), ctrl.updatePayroll);
+router.get ('/roles',           authz('roles:view'),      ctrl.listRoles);
+router.get ('/users',           authz('users:view'),      ctrl.listUsers);
+module.exports=router;

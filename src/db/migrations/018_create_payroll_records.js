@@ -1,0 +1,27 @@
+exports.up = (knex) => knex.schema.createTable('payroll_records', (t) => {
+  t.text('id').primary();
+  t.text('tenant_id').notNullable().references('id').inTable('tenants').onDelete('CASCADE');
+  t.text('cycle_id').notNullable().references('id').inTable('payroll_cycles').onDelete('CASCADE');
+  t.text('employee_id').notNullable().references('id').inTable('employees').onDelete('CASCADE');
+  t.real('base_salary').defaultTo(0);
+  t.real('allowances').defaultTo(0);
+  t.real('overtime_pay').defaultTo(0);
+  t.real('bonus').defaultTo(0);
+  t.real('gross_salary').defaultTo(0);
+  t.real('tax_amount').defaultTo(0);
+  t.real('insurance_amount').defaultTo(0);
+  t.real('absence_deduction').defaultTo(0);
+  t.real('other_deductions').defaultTo(0);
+  t.real('total_deductions').defaultTo(0);
+  t.real('net_salary').defaultTo(0);
+  t.integer('working_days').defaultTo(22);
+  t.integer('absent_days').defaultTo(0);
+  t.integer('overtime_minutes').defaultTo(0);
+  t.text('status').defaultTo('draft');
+  t.text('notes');
+  t.text('deleted_at');
+  t.text('created_at').notNullable();
+  t.text('updated_at').notNullable();
+  t.unique(['cycle_id','employee_id']);
+});
+exports.down = (knex) => knex.schema.dropTableIfExists('payroll_records');

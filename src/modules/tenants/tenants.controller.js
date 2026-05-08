@@ -1,0 +1,10 @@
+const svc=require('./tenants.service');
+const asyncHandler=require('../../utils/asyncHandler');
+const { success,created,noContent,paginated }=require('../../utils/response');
+const list      =asyncHandler(async(req,res)=>{ const r=await svc.list(req.query); paginated(res,r.data,r.meta); });
+const getById   =asyncHandler(async(req,res)=>success(res,await svc.getById(req.params.id)));
+const create    =asyncHandler(async(req,res)=>created(res,await svc.create(req.validated)));
+const update    =asyncHandler(async(req,res)=>success(res,await svc.update(req.params.id,req.validated)));
+const deactivate=asyncHandler(async(req,res)=>{ await svc.deactivate(req.params.id); noContent(res); });
+const activate  =asyncHandler(async(req,res)=>{ await svc.activate(req.params.id); noContent(res); });
+module.exports={ list,getById,create,update,deactivate,activate };

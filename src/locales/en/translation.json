@@ -1,0 +1,51 @@
+{
+  "errors": {
+    "not_found": "Resource not found",
+    "unauthorized": "Unauthorized access",
+    "forbidden": "You do not have permission to perform this action",
+    "validation_failed": "Validation failed",
+    "conflict": "Resource already exists",
+    "business_error": "Business rule violation",
+    "internal": "An unexpected error occurred"
+  },
+  "auth": {
+    "invalid_credentials": "Invalid email or password",
+    "token_expired": "Your session has expired. Please log in again",
+    "token_invalid": "Invalid token",
+    "account_deactivated": "Your account has been deactivated",
+    "password_reset_sent": "If the email exists, a reset link has been sent",
+    "password_reset_success": "Password reset successfully",
+    "logged_out": "Logged out successfully"
+  },
+  "employees": {
+    "not_found": "Employee not found",
+    "number_conflict": "Employee number already exists",
+    "already_terminated": "Employee is already terminated"
+  },
+  "attendance": {
+    "already_clocked_in": "You have already clocked in today",
+    "already_clocked_out": "You have already clocked out today",
+    "no_clock_in": "No clock-in record found for today",
+    "location_error": "Unable to verify your location",
+    "policy_not_found": "Attendance policy not configured"
+  },
+  "leave": {
+    "insufficient_balance": "Insufficient leave balance",
+    "invalid_date_range": "Invalid date range",
+    "not_pending": "Only pending requests can be reviewed",
+    "not_found": "Leave request not found"
+  },
+  "payroll": {
+    "cycle_exists": "Payroll cycle already exists for this month",
+    "cycle_not_found": "Payroll cycle not found",
+    "not_processable": "Cycle is not in a processable state",
+    "already_processed": "This record has already been processed",
+    "already_cancelled": "This cycle has already been cancelled"
+  },
+  "notifications": {
+    "leave_approved": "Your leave request has been approved",
+    "leave_rejected": "Your leave request has been rejected",
+    "review_submitted": "A performance review has been submitted for you",
+    "announcement": "New announcement"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "errors": {
+    "not_found": "المورد غير موجود",
+    "unauthorized": "وصول غير مصرح به",
+    "forbidden": "ليس لديك صلاحية تنفيذ هذا الإجراء",
+    "validation_failed": "فشل التحقق من البيانات",
+    "conflict": "المورد موجود بالفعل",
+    "business_error": "انتهاك قاعدة العمل",
+    "internal": "حدث خطأ غير متوقع"
+  },
+  "auth": {
+    "invalid_credentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+    "token_expired": "انتهت جلستك. يرجى تسجيل الدخول مجدداً",
+    "token_invalid": "الرمز غير صالح",
+    "account_deactivated": "تم تعطيل حسابك",
+    "password_reset_sent": "إذا كان البريد موجوداً، فقد تم إرسال رابط الإعادة",
+    "password_reset_success": "تم إعادة تعيين كلمة المرور بنجاح",
+    "logged_out": "تم تسجيل الخروج بنجاح"
+  },
+  "employees": {
+    "not_found": "الموظف غير موجود",
+    "number_conflict": "رقم الموظف موجود بالفعل",
+    "already_terminated": "الموظف منتهي الخدمة بالفعل"
+  },
+  "attendance": {
+    "already_clocked_in": "لقد سجلت حضورك بالفعل اليوم",
+    "already_clocked_out": "لقد سجلت انصرافك بالفعل اليوم",
+    "no_clock_in": "لا يوجد سجل حضور لهذا اليوم",
+    "location_error": "تعذر التحقق من موقعك",
+    "policy_not_found": "لم يتم تكوين سياسة الحضور"
+  },
+  "leave": {
+    "insufficient_balance": "رصيد الإجازات غير كافٍ",
+    "invalid_date_range": "نطاق التاريخ غير صالح",
+    "not_pending": "يمكن مراجعة الطلبات المعلقة فقط",
+    "not_found": "طلب الإجازة غير موجود"
+  },
+  "payroll": {
+    "cycle_exists": "دورة الرواتب موجودة بالفعل لهذا الشهر",
+    "cycle_not_found": "دورة الرواتب غير موجودة",
+    "not_processable": "الدورة ليست في حالة قابلة للمعالجة",
+    "already_processed": "تمت معالجة هذا السجل بالفعل",
+    "already_cancelled": "تم إلغاء هذه الدورة بالفعل"
+  },
+  "notifications": {
+    "leave_approved": "تمت الموافقة على طلب إجازتك",
+    "leave_rejected": "تم رفض طلب إجازتك",
+    "review_submitted": "تم تقديم مراجعة الأداء الخاصة بك",
+    "announcement": "إعلان جديد"
+  }
+}

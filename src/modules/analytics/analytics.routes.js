@@ -1,0 +1,15 @@
+const router=require('express').Router();
+const ctrl=require('./analytics.controller');
+const auth=require('../../middleware/authenticate');
+const ts=require('../../middleware/tenantScope');
+const authz=require('../../middleware/authorize');
+router.use(auth,ts);
+router.get ('/overview',           authz('analytics:view'),   ctrl.overview);
+router.get ('/attendance-trends',  authz('analytics:view'),   ctrl.attendanceTrends);
+router.get ('/payroll-trends',     authz('analytics:view'),   ctrl.payrollTrends);
+router.get ('/leave-usage',        authz('analytics:view'),   ctrl.leaveUsage);
+router.get ('/performance',        authz('analytics:view'),   ctrl.performance);
+router.get ('/kpi-achievement',    authz('analytics:view'),   ctrl.kpiAchievement);
+router.get ('/headcount',          authz('analytics:view'),   ctrl.headcount);
+router.post('/export',             authz('analytics:export'), ctrl.exportReport);
+module.exports=router;
